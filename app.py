@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request
 from src.helper import download_hugging_face_embeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain.prompts import PromptTemplate
-from langchain.llms import CTransformers
+from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
 from pinecone import Pinecone
 from dotenv import load_dotenv
@@ -32,8 +32,7 @@ index = pc.Index(
 # Load the existing index as a vector store
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
-    embedding=embeddings,
-    pinecone_api_key=PINECONE_API_KEY
+    embedding=embeddings
 )
 
 # Create prompt template
